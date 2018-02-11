@@ -31,7 +31,7 @@ public class MediaOrganizer {
   private final Logger logger = LoggerFactory.getLogger(getClass());
 
   @Autowired
-  private MediaOrganizerConfiguration configuration;
+  private MediaOrganizerProperties configuration;
 
   @Autowired
   private TaskScheduler scheduler;

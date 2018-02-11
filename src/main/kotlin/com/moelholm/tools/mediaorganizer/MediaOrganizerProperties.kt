@@ -7,7 +7,7 @@ import java.util.Arrays
 import java.util.Locale
 
 @Component
-class MediaOrganizerConfiguration {
+class MediaOrganizerProperties {
 
     @Value("\${daemon.scheduleAsCronExpression}")
     val scheduleAsCronExpression: String? = null
