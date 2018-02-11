@@ -72,6 +72,9 @@ class StartListener(
 
     private fun printApplicationStartedMessage(fromDir: String, toDir: String, runMode: String?,
                                                fileSystemType: FileSystemType) {
+
+        // TODO :: Kotlinize this baby
+
         logger.info("")
         logger.info("Application started with the following arguments:")
         logger.info("    --{} = {}", MainArgument.RUN_MODE.argumentName, runMode)
