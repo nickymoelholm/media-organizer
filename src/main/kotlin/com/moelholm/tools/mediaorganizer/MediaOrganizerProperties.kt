@@ -2,36 +2,32 @@ package com.moelholm.tools.mediaorganizer
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
-
-import java.util.Arrays
-import java.util.Locale
+import java.util.*
 
 @Component
-class MediaOrganizerProperties {
-
-    @Value("\${daemon.scheduleAsCronExpression}")
-    val scheduleAsCronExpression: String? = null
-
-    @Value("\${mediafiles.datepattern}")
-    val mediaFilesDatePattern: String? = null
+class MediaOrganizerProperties(
 
     @Value("\${mediafiles.mediaFileExtensionsToMatch}")
-    private val mediaFileExtensionsToMatch: Array<String>? = null
+    private val mediaFileExtensionsToMatch: Array<String>,
+
+    @Value("\${daemon.scheduleAsCronExpression}")
+    val scheduleAsCronExpression: String,
+
+    @Value("\${mediafiles.datepattern}")
+    val mediaFilesDatePattern: String,
 
     @Value("\${destination.amountOfMediaFilesIndicatingAnEvent}")
-    val amountOfMediaFilesIndicatingAnEvent: Int = 0
+    val amountOfMediaFilesIndicatingAnEvent: Int,
 
     @Value("\${destination.localeForGeneratingDestinationFolderNames}")
-    val locale: Locale? = null
+    val locale: Locale,
 
     @Value("\${destination.suffixForDestinationFolderOfUnknownEventMediaFiles}")
-    val suffixForDestinationFolderOfUnknownEventMediaFiles: String? = null
+    val suffixForDestinationFolderOfUnknownEventMediaFiles: String,
 
     @Value("\${destination.suffixForDestinationFolderOfMiscMediaFiles}")
-    val suffixForDestinationFolderOfMiscMediaFiles: String? = null
+    val suffixForDestinationFolderOfMiscMediaFiles: String
 
-    fun getMediaFileExtensionsToMatch(): List<String> {
-        return Arrays.asList(*mediaFileExtensionsToMatch!!)
-    }
-
+) {
+    fun getMediaFileExtensionsToMatch(): List<String> = listOf(*mediaFileExtensionsToMatch)
 }
