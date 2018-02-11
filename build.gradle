@@ -1,31 +1,56 @@
 buildscript {
     ext {
-        springBootVersion = '1.5.1.RELEASE'
+        kotlinVersion = '1.2.20'
+        springBootVersion = '2.0.0.RC1'
         commonsLangVersion = '2.4'
     }
     repositories {
         mavenCentral()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
     }
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
     }
 }
 
-apply plugin: 'java'
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-spring'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
 group 'com.moelholm'
 
 sourceCompatibility = 1.8
 
+compileKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+
+compileTestKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+
 repositories {
     mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
 }
 
 dependencies {
 
-    compile "org.springframework.boot:spring-boot-starter-actuator"
-    compile "org.springframework.boot:spring-boot-starter-web"
+    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    compile("org.jetbrains.kotlin:kotlin-reflect")
+    compile('org.springframework.boot:spring-boot-starter-web')
+
     compile "com.fasterxml.jackson.core:jackson-databind"
     compile "commons-lang:commons-lang:${commonsLangVersion}"
 
@@ -33,15 +58,15 @@ dependencies {
 
 }
 
-task triggerJob << {
-
-    if (System.getenv('web.apiKey') != null && System.getenv('web.url') != null) {
-        print "Running media organizer"
-        System.getenv("web.url")
-                .toURL()
-                .getText(requestProperties: [Authorization: System.getenv('web.apiKey')])
-    } else {
-        logger.error "Did not find apiKey and/or url in environment variables!"
+task triggerJob {
+    doLast {
+        if (System.getenv('web.apiKey') != null && System.getenv('web.url') != null) {
+            print "Running media organizer"
+            System.getenv("web.url")
+                    .toURL()
+                    .getText(requestProperties: [Authorization: System.getenv('web.apiKey')])
+        } else {
+            logger.error "Did not find apiKey and/or url in environment variables!"
+        }
     }
-
 }
