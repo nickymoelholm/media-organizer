@@ -34,7 +34,7 @@ public class StartListener {
       return;
     }
 
-    String runMode = environment.getProperty(MainArgument.RUNMODE.getArgumentName());
+    String runMode = environment.getProperty(MainArgument.RUN_MODE.getArgumentName());
     FileSystemType fileSystemType = FileSystemType
         .fromString(environment.getProperty(MainArgument.FILESYSTEM_TYPE.getArgumentName()));
     String fromDir = environment.getProperty(MainArgument.FROM_DIR.getArgumentName());
@@ -85,7 +85,7 @@ public class StartListener {
       FileSystemType fileSystemType) {
     logger.info("");
     logger.info("Application started with the following arguments:");
-    logger.info("    --{} = {}", MainArgument.RUNMODE.getArgumentName(), runMode);
+    logger.info("    --{} = {}", MainArgument.RUN_MODE.getArgumentName(), runMode);
     logger.info("    --{} = {}", MainArgument.FILESYSTEM_TYPE.getArgumentName(),
         fileSystemType.toString().toLowerCase());
     logger.info("    --{} = {}", MainArgument.FROM_DIR.getArgumentName(), fromDir);
@@ -98,7 +98,7 @@ public class StartListener {
     logger.info(
         "Usage: Main --{}=[dir to copy from] --{}=[dir to copy to] [--{}=[mode]] [--{}=[type]]",
         MainArgument.FROM_DIR.getArgumentName(),
-        MainArgument.TO_DIR.getArgumentName(), MainArgument.RUNMODE.getArgumentName(),
+        MainArgument.TO_DIR.getArgumentName(), MainArgument.RUN_MODE.getArgumentName(),
         MainArgument.FILESYSTEM_TYPE.getArgumentName());
     logger.info("");
     logger.info("  Where:");
@@ -108,7 +108,7 @@ public class StartListener {
     logger.info("    --{} folder that should contain the organized media files",
         MainArgument.TO_DIR.getArgumentName());
     logger.info("    --{} One of: [once, daemon, web]. Default is once",
-        MainArgument.RUNMODE.getArgumentName());
+        MainArgument.RUN_MODE.getArgumentName());
     logger.info("    --{} One of: [local, dropbox]. Default is local",
         MainArgument.FILESYSTEM_TYPE.getArgumentName());
     logger.info("");
