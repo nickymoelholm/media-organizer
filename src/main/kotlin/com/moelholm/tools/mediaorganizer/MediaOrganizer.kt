@@ -126,7 +126,7 @@ class MediaOrganizer(private val configuration: MediaOrganizerProperties,
 
     private fun move(fileToMove: Path, pathThatFileShouldBeMovedTo: Path) =
         try {
-            logger.info("    {}", pathThatFileShouldBeMovedTo.fileName)
+            logger.info("    $pathThatFileShouldBeMovedTo.fileName")
             fileSystem.move(fileToMove, pathThatFileShouldBeMovedTo)
         } catch (e: FileAlreadyExistsException) {
             logger.info("File [${pathThatFileShouldBeMovedTo.fileName}] exists at destination folder - so skipping that")

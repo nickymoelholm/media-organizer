@@ -13,7 +13,8 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler
 class BeanConfig(private val environment: Environment) {
 
     @Bean
-    fun taskScheduler(): ThreadPoolTaskScheduler = ThreadPoolTaskScheduler()
+    fun taskScheduler(): ThreadPoolTaskScheduler =
+        ThreadPoolTaskScheduler()
 
     @Bean
     fun fileSystem(): FileSystem =
