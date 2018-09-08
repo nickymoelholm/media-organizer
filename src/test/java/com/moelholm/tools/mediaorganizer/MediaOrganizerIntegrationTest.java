@@ -29,20 +29,12 @@ public class MediaOrganizerIntegrationTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(MediaOrganizerIntegrationTest.class);
 
-    // --------------------------------------------------------------------------------------------------------------------------------------------
-    // Member fields
-    // --------------------------------------------------------------------------------------------------------------------------------------------
-
     @Autowired
-    private MediaOrganizer organizer;// S.U.T.
+    private MediaOrganizer organizer;
 
     private Path from;
 
     private Path to;
-
-    // --------------------------------------------------------------------------------------------------------------------------------------------
-    // Integration tests
-    // --------------------------------------------------------------------------------------------------------------------------------------------
 
     @Test
     public void undoFlatMess_whenProcessingNonMediaFiles_thenSkipsThem() {
@@ -110,10 +102,6 @@ public class MediaOrganizerIntegrationTest {
 
     }
 
-    // --------------------------------------------------------------------------------------------------------------------------------------------
-    // Test setup / teardown
-    // --------------------------------------------------------------------------------------------------------------------------------------------
-
     @After
     public void after() {
         LOG.info("Test stopped");
@@ -127,10 +115,6 @@ public class MediaOrganizerIntegrationTest {
         from = createTestDataDirectoryAndReturnPath("target/testground-from");
         to = createTestDataDirectoryAndReturnPath("target/testground-to");
     }
-
-    // --------------------------------------------------------------------------------------------------------------------------------------------
-    // Private functionality
-    // --------------------------------------------------------------------------------------------------------------------------------------------
 
     private void assertPathExistsInDirectory(Path directoryPath, String first, String... other) {
         Path pathInToDirectoryPath = directoryPath.resolve(Paths.get(first, other));
